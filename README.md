@@ -4,8 +4,9 @@ Let`s rock!
 
 # Server workflow
 1. server should bind to port 6666 with REP socket
-2. server receives a message with a single frame saying 'Hello', otherwise will discard the message
-3. server replies with single frames with 'Hello World'
+2. server receives a message with a single frame
+3. If message saying 'Hello' server replies with single frames with 'Hello World'
+4. Otherwise server reply with 'Error'
 
 # Cient workflow
 1. client connects to tcp://192.168.43.186:6666 with REQ with socket
