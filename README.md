@@ -30,6 +30,6 @@ The client MUST start with the "Discovery workflow"
 ### Connect workflow
 
 1. SHOULD connect to the ADDRESS with a socket of type `dealer`
-2. MUST send `"Hello"`
+2. MUST send `"Hello from NICKNAME"` where is the name of the sender.
 3. MUST log the reply
 4. SHOULD return and continue on the "Discovery workflow"
