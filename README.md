@@ -26,7 +26,7 @@ Let`s rock!
 
 
 ## Cient workflow I
-* client subscribe to topics on port 6665
+* client subscribe to topic ```discovery``` on port 6665
 * on every received message client should execute workflow II
 
 ## Client workflow II
