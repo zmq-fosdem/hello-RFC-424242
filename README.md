@@ -8,7 +8,7 @@ Let`s rock!
 3. If message saying 'Hello' server replies with single frames with 'Hello World'
 4. Otherwise server reply with 'Error'
 
-# Cient workflow
+# Client workflow
 1. client connects to tcp://192.168.43.186:6666 with REQ with socket
 2. client send a message with a single frame 'Hello'
 3. client wait for server response
