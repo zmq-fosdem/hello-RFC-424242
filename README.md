@@ -1,14 +1,35 @@
-###ZMQ FOSDEM RFC
+# V2
 
-Let`s rock!
+## Server
 
-# Server workflow
-1. server should bind to port 6666 with REP socket
-2. server receives a message with a single frame
-3. If message saying 'Hello' server replies with single frames with 'Hello World'
-4. Otherwise server reply with 'Error'
+* MUST choose a port that SHOULD be random — SERVICE_PORT
+* MUST choose a secret — SECRET_RESPONSE
 
-# Cient workflow
-1. client connects to tcp://192.168.43.186:6666 with REQ with socket
-2. client send a message with a single frame 'Hello'
-3. client wait for server response
+The server MUST run both workflows in parallel.
+
+### Service workflow
+
+* MUST listen on port SERVICE_PORT with a socket of type `router`
+* Upon requests, MUST reply with a secret response
+
+### Discovery workflow
+
+* MUST use a socket of type `pub` to publish its LOCATION every second on port 6665
+* the LOCATION is defined by the last octet of the server IP and SERVICE_PORT and format MUST be "last_ip_octet:SERVICE_PORT"
+
+
+## Client
+
+The client MUST start with the "Discovery workflow"
+
+### Discovery workflow
+
+* for every possible last_ip_octet (1-254) the client SHOULD subscribe to topic `discovery` on port 6665
+* Upon received messages from subscriptions, the client SHOULD generate the respective ADDRESS from the last_ip_octet and PORT and use it for the "Connect Workflow"
+
+### Connect workflow
+
+1. SHOULD connect to the ADDRESS with a socket of type `dealer`
+2. MUST send `"Hello"`
+3. MUST log the reply
+4. SHOULD return and continue on the "Discovery workflow"
